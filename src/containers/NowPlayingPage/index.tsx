@@ -63,7 +63,6 @@ export default class NowPlayingPage extends React.Component<
         filtering: false
       });
     } else {
-      console.log(this.state);
       this.setState({
         ...this.state,
         filterBy: e.target.value,
