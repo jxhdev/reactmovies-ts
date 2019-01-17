@@ -3,6 +3,7 @@ import axios from 'axios';
 import MovieCard from '../MovieCard';
 import './index.css';
 import fetchAll from '../../utils/fetchAll';
+import uuid from 'uuid/v4';
 
 export interface IMovie {
   [key: string]: boolean | string | number;
@@ -13,7 +14,9 @@ interface NowPlayingPageState {
   completeResults: IMovie[][];
   currentPage: IMovie[];
   pageNumber: number;
-  showAll: boolean;
+  filtering: boolean;
+  filterBy: string;
+  filteredResults: IMovie[];
 }
 
 export default class NowPlayingPage extends React.Component<
@@ -28,7 +31,9 @@ export default class NowPlayingPage extends React.Component<
       completeResults: [],
       currentPage: [],
       pageNumber: 0,
-      showAll: true
+      filtering: false,
+      filterBy: '',
+      filteredResults: []
     };
   }
 
@@ -38,7 +43,7 @@ export default class NowPlayingPage extends React.Component<
       completeResults: res,
       currentPage: res[0],
       pageNumber: 1,
-      showAll: true
+      filtering: false
     });
   }
 
@@ -50,33 +55,75 @@ export default class NowPlayingPage extends React.Component<
     });
   };
 
+  private handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.value === '') {
+      this.setState({
+        ...this.state,
+        filterBy: e.target.value,
+        filtering: false
+      });
+    } else {
+      console.log(this.state);
+      this.setState({
+        ...this.state,
+        filterBy: e.target.value,
+        filtering: true,
+        filteredResults: this.state.completeResults.reduce((all, results) => {
+          all = all.concat(
+            results.filter(movie =>
+              (movie.title as string).toLowerCase().includes(e.target.value)
+            )
+          );
+          return all;
+        }, [])
+      });
+    }
+  };
+
   public render() {
     return (
       <div>
-        <ul className="movie-list">
-          {this.state.completeResults.length > 0
-            ? this.state.currentPage.map(movie => (
-                <MovieCard key={movie.id as number} data={movie} />
-              ))
-            : null}
-        </ul>
-        <div className="pages-button">
-          {this.state.completeResults.map((page, idx) =>
-            idx + 1 === this.state.pageNumber ? (
-              <button
-                key={idx}
-                className="active-page"
-                onClick={() => this.handlePageChange(idx)}
-              >
-                {idx + 1}
-              </button>
-            ) : (
-              <button key={idx} onClick={() => this.handlePageChange(idx)}>
-                {idx + 1}
-              </button>
-            )
-          )}
-        </div>
+        <input
+          type="text"
+          onChange={this.handleSearchChange}
+          value={this.state.filterBy}
+          placeholder="Filter results"
+        />
+        {!this.state.filtering && (
+          <>
+            <ul className="movie-list">
+              {this.state.completeResults.length > 0
+                ? this.state.currentPage.map(movie => (
+                    <MovieCard key={uuid()} data={movie} />
+                  ))
+                : null}
+            </ul>
+            <div className="pages-button">
+              {this.state.completeResults.map((page, idx) =>
+                idx + 1 === this.state.pageNumber ? (
+                  <button
+                    key={idx}
+                    className="active-page"
+                    onClick={() => this.handlePageChange(idx)}
+                  >
+                    {idx + 1}
+                  </button>
+                ) : (
+                  <button key={idx} onClick={() => this.handlePageChange(idx)}>
+                    {idx + 1}
+                  </button>
+                )
+              )}
+            </div>
+          </>
+        )}
+        {this.state.filtering && (
+          <ul className="movie-list">
+            {this.state.filteredResults.map(movie => (
+              <MovieCard key={uuid()} data={movie} />
+            ))}
+          </ul>
+        )}
       </div>
     );
   }
