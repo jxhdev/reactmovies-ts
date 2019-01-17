@@ -8,7 +8,9 @@ import uuid from 'uuid/v4';
 export interface IMovie {
   [key: string]: boolean | string | number;
 }
-interface NowPlayingPageProps {}
+interface NowPlayingPageProps {
+  nowPlaying: any;
+}
 
 interface NowPlayingPageState {
   completeResults: IMovie[][];
@@ -23,8 +25,6 @@ export default class NowPlayingPage extends React.Component<
   NowPlayingPageProps,
   NowPlayingPageState
 > {
-  response = {};
-  pages: number[] = [];
   public constructor(props: NowPlayingPageProps) {
     super(props);
     this.state = {
@@ -38,13 +38,14 @@ export default class NowPlayingPage extends React.Component<
   }
 
   public async componentDidMount() {
-    const res = await fetchAll();
-    this.setState({
-      completeResults: res,
-      currentPage: res[0],
+    console.log(this.props.nowPlaying);
+    await this.setState({
+      completeResults: this.props.nowPlaying,
+      currentPage: this.props.nowPlaying[0],
       pageNumber: 1,
       filtering: false
     });
+    console.log('inside nowplaying', this.state);
   }
 
   private handlePageChange = async (pageNumber: number) => {
