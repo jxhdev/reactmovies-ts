@@ -1,7 +1,7 @@
 import * as React from 'react';
 import axios from 'axios';
-import MovieCard from '../MovieCard';
-import './index.css';
+import MovieCard from '../../components/MovieCard';
+import './NowPlayingPage.css';
 import fetchAll from '../../utils/fetchAll';
 import uuid from 'uuid/v4';
 
@@ -82,7 +82,7 @@ export default class NowPlayingPage extends React.Component<
 
   public render() {
     return (
-      <div>
+      <div className="now-playing-page">
         <input
           type="text"
           onChange={this.handleSearchChange}

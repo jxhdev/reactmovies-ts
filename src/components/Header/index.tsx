@@ -1,5 +1,7 @@
 import * as React from 'react';
+
 import './Header.css';
+import { NavLink } from 'react-router-dom';
 
 interface HeaderProps {}
 
@@ -10,16 +12,27 @@ const Header: React.FC<HeaderProps> = props => {
     e.preventDefault();
     console.log('submitted');
   };
-  const handleSearchChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setSearch(e.target.value);
-  };
 
   return (
     <div className="header">
       <h1>React Movies</h1>
-      <form onSubmit={handleSubmit}>
-        <input type="text" onChange={handleSearchChange} value={search} />
-      </form>
+      <div className="header-link-group">
+        <NavLink
+          to="/nowplaying"
+          className="header-link"
+          activeClassName="header-link-selected"
+        >
+          Now Playing
+        </NavLink>
+        <NavLink
+          to="/asdf"
+          className="header-link"
+          activeClassName="header-link-selected"
+        >
+          Account
+        </NavLink>
+      </div>
+      <form onSubmit={handleSubmit} />
     </div>
   );
 };

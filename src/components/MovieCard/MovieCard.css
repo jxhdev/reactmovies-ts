@@ -3,9 +3,14 @@ li {
 }
 
 .movie-card {
-  width: 20rem;
+  width: fit-content;
+  max-width: 20rem;
   margin: 1rem;
   background-color: yellow;
   padding: 1rem;
   border: 1px solid black;
+}
+
+.movie-card img {
+  width: 100%;
 }

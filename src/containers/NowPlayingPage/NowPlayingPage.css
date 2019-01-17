@@ -1,4 +1,15 @@
+.now-playing-page input {
+  margin: 1rem 0 0 0;
+  padding: 1rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  border: 0.1rem solid black;
+  box-shadow: 0 0.1rem 0.1rem 0.1rem lightgray;
+  outline: none;
+}
+
 .movie-list {
+  padding: 0;
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
@@ -6,7 +17,7 @@
 }
 
 .pages-button {
-  margin-bottom: 2rem;
+  padding-bottom: 2rem;
 }
 
 .pages-button button {

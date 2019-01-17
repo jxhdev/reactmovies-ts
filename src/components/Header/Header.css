@@ -10,18 +10,20 @@
 }
 
 .header h1 {
-  margin: 0.5rem;
+  margin: 1rem 2rem;
+}
+.header-link-group {
+  display: flex;
+  justify-content: flex-end;
+  flex-grow: 1;
+}
+.header-link {
+  color: white;
+  font-weight: bold;
+  margin: 0 2rem 0rem 0rem;
+  text-decoration: none;
 }
 
-form {
-  height: 100%;
-  margin-right: 2rem;
-}
-
-input {
-  border-radius: 0.4rem;
-  height: 100%;
-  font-size: 1.6rem;
-  font-weight: 400;
-  padding: 0;
+.header-link-selected {
+  text-decoration: underline;
 }

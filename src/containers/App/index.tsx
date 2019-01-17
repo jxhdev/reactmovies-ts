@@ -1,7 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
 import Header from '../../components/Header';
-import NowPlayingPage from '../../components/NowPlayingPage';
+import NowPlayingPage from '../NowPlayingPage';
+import Routes from '../../components/Routes';
 
 class App extends Component {
   render() {
@@ -10,8 +11,8 @@ class App extends Component {
         <header className="App-header">
           <Header />
         </header>
-        <main>
-          <NowPlayingPage />
+        <main className="content-container">
+          <Routes />
         </main>
       </div>
     );
