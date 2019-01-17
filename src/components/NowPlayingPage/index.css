@@ -1,0 +1,31 @@
+.movie-list {
+  display: flex;
+  flex-direction: row;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.pages-button {
+  margin-bottom: 2rem;
+}
+
+.pages-button button {
+  background-color: white;
+  padding: 0.8rem 3rem;
+  margin: 0.2rem;
+  font-size: 2rem;
+  border-radius: 0.5rem;
+  border: 1px solid rgb(99, 99, 99, 0.3);
+  box-shadow: 0rem 0.1em rgba(0, 0, 0, 0.2);
+  outline: none;
+}
+
+.pages-button button:active {
+  transform: translateY(0.1rem);
+  box-shadow: 0 0.1rem rgba(0, 0, 0, 0.2);
+}
+
+button.active-page {
+  background-color: lightgray;
+  font-weight: 500;
+}

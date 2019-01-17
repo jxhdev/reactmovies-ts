@@ -1,0 +1,11 @@
+li {
+  list-style: none;
+}
+
+.movie-card {
+  width: 20rem;
+  margin: 1rem;
+  background-color: yellow;
+  padding: 1rem;
+  border: 1px solid black;
+}
