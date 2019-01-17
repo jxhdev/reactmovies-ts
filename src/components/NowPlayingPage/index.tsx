@@ -2,6 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import MovieCard from '../MovieCard';
 import './index.css';
+import fetchAll from '../../utils/fetchAll';
 
 export interface IMovie {
   [key: string]: boolean | string | number;
@@ -9,9 +10,10 @@ export interface IMovie {
 interface NowPlayingPageProps {}
 
 interface NowPlayingPageState {
-  movies: IMovie[];
-  pages: any[];
+  completeResults: IMovie[][];
+  currentPage: IMovie[];
   pageNumber: number;
+  showAll: boolean;
 }
 
 export default class NowPlayingPage extends React.Component<
@@ -23,76 +25,54 @@ export default class NowPlayingPage extends React.Component<
   public constructor(props: NowPlayingPageProps) {
     super(props);
     this.state = {
-      movies: [],
-      pages: [],
-      pageNumber: 1
+      completeResults: [],
+      currentPage: [],
+      pageNumber: 0,
+      showAll: true
     };
   }
 
-  public componentDidMount() {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${
-          process.env.REACT_APP_TMDB_API_KEY
-        }&language=en-US&page=1&region=us
-`
-      )
-      .then(response => {
-        console.log(response.data);
-        this.setState({
-          movies: response.data.results,
-          pages: Array(response.data.total_pages)
-            .fill(1)
-            .map((item, idx) => idx + 1)
-        });
-        this.response = response.data;
-        console.log(this.state);
-      })
-      .catch(err => {
-        console.log(err);
-      });
+  public async componentDidMount() {
+    const res = await fetchAll();
+    this.setState({
+      completeResults: res,
+      currentPage: res[0],
+      pageNumber: 1,
+      showAll: true
+    });
   }
 
   private handlePageChange = async (pageNumber: number) => {
-    axios
-      .get(
-        `https://api.themoviedb.org/3/movie/now_playing?api_key=${
-          process.env.REACT_APP_TMDB_API_KEY
-        }&language=en-US&page=${pageNumber}&region=us
-`
-      )
-      .then(response => {
-        this.setState({
-          movies: response.data.results,
-          pageNumber
-        });
-      })
-      .catch(err => {
-        console.log(err);
-      });
+    this.setState({
+      ...this.state,
+      currentPage: this.state.completeResults[pageNumber],
+      pageNumber: pageNumber + 1
+    });
   };
 
   public render() {
     return (
       <div>
         <ul className="movie-list">
-          {this.state.movies.map(movie => (
-            <MovieCard key={movie.id as number} data={movie} />
-          ))}
+          {this.state.completeResults.length > 0
+            ? this.state.currentPage.map(movie => (
+                <MovieCard key={movie.id as number} data={movie} />
+              ))
+            : null}
         </ul>
         <div className="pages-button">
-          {this.state.pages.map(page =>
-            page === this.state.pageNumber ? (
+          {this.state.completeResults.map((page, idx) =>
+            idx + 1 === this.state.pageNumber ? (
               <button
-                key={page}
+                key={idx}
                 className="active-page"
-                onClick={() => this.handlePageChange(page)}
+                onClick={() => this.handlePageChange(idx)}
               >
-                {page}
+                {idx + 1}
               </button>
             ) : (
-              <button key={page} onClick={() => this.handlePageChange(page)}>
-                {page}
+              <button key={idx} onClick={() => this.handlePageChange(idx)}>
+                {idx + 1}
               </button>
             )
           )}
