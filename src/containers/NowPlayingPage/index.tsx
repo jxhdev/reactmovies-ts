@@ -93,7 +93,9 @@ export default class NowPlayingPage extends React.Component<
             <ul className="movie-list">
               {this.state.completeResults.length > 0
                 ? this.state.currentPage.map(movie => (
-                    <MovieCard key={uuid()} data={movie} />
+                    <li>
+                      <MovieCard key={uuid()} data={movie} />
+                    </li>
                   ))
                 : null}
             </ul>

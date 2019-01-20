@@ -1,4 +1,6 @@
 .header {
+  position: fixed;
+  width: 100%;
   background-color: #303f9f;
   min-height: 1rem;
   display: flex;
@@ -26,4 +28,13 @@
 
 .header-link-selected {
   text-decoration: underline;
+}
+
+@media only screen and (max-width: 374px) {
+  .header {
+    font-size: 1rem;
+  }
+  .header-link-group {
+    font-size: 1rem;
+  }
 }

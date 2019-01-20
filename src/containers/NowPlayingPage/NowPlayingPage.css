@@ -1,9 +1,9 @@
 .now-playing-page input {
   margin: 1rem 0 0 0;
   padding: 1rem;
-  font-size: 2rem;
+  font-size: 1.5rem;
   border-radius: 0.5rem;
-  border: 0.1rem solid black;
+  border: 0.1rem solid #bdbdbd;
   box-shadow: 0 0.1rem 0.1rem 0.1rem lightgray;
   outline: none;
 }
@@ -13,6 +13,11 @@
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: center;
+}
+
+.movie-list li {
+  display: flex;
   justify-content: center;
 }
 
@@ -39,4 +44,11 @@
 button.active-page {
   background-color: lightgray;
   font-weight: 500;
+}
+
+@media only screen and (min-width: 480px) {
+  .now-playing-page input {
+    margin-top: 2rem;
+    font-size: 2rem;
+  }
 }
