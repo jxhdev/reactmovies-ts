@@ -39,7 +39,7 @@ export default class NowPlayingPage extends React.Component<
 
   public async componentDidMount() {
     console.log(this.props.nowPlaying);
-    await this.setState({
+    this.setState({
       completeResults: this.props.nowPlaying,
       currentPage: this.props.nowPlaying[0],
       pageNumber: 1,
