@@ -9,7 +9,8 @@ export interface MoviePageProps extends RouteComponentProps<any> {}
 
 export interface MoviePageState {
   data: {
-    [key: string]: string | number | undefined;
+    genres?: any[] | undefined;
+    [key: string]: any[] | string | number | undefined;
   };
   error: boolean;
   errorMessage: string;
@@ -29,8 +30,15 @@ class MoviePage extends React.Component<MoviePageProps, MoviePageState> {
     this.setState({ ...this.state, data: result.data, loading: false });
   }
 
+  private formatter = new Intl.NumberFormat('en-US', {
+    style: 'currency',
+    currency: 'USD',
+    minimumFractionDigits: 0
+  });
+
   render() {
     const { data } = this.state;
+
     return (
       <>
         {!this.state.loading && (
@@ -46,7 +54,38 @@ class MoviePage extends React.Component<MoviePageProps, MoviePageState> {
             }}
           >
             <div className="movie-page__infobox">
-              <h1 className="movie-page__infobox-title">{data.title}</h1>
+              <div className="movie-page__infobox-title">
+                <h1>{data.title}</h1>
+                <div className="tagline">
+                  <i>{data.tagline}</i>
+                </div>
+                <div className="rating">
+                  <p>
+                    Rating: {data.vote_average} / 10{' '}
+                    <span className="vote-count">
+                      ({data.vote_count} votes)
+                    </span>
+                  </p>
+                </div>
+              </div>
+              <div className="movie-page__infobox-description">
+                <ul>
+                  <li>
+                    Runtime: {data.runtime ? data.runtime + ' minutes' : 'n/a'}
+                  </li>
+                  <li>
+                    Budget:{' '}
+                    {data.budget && data.budget > 0
+                      ? this.formatter.format(data.budget as number)
+                      : 'n/a'}
+                  </li>
+                  <li>
+                    Genre:{' '}
+                    {data.genres && data.genres.map(item => item.name + ' ')}
+                  </li>
+                </ul>
+                <p>Overview: {data.overview}</p>
+              </div>
             </div>
           </div>
         )}

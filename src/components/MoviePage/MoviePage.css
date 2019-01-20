@@ -15,6 +15,26 @@
   border: 1px solid rgba(135, 135, 135, 0.8);
 }
 
+.tagline {
+  margin: 0.5rem;
+}
+
+.vote-count {
+  font-size: 75%;
+}
+
+.rating {
+  margin: 1rem;
+}
+
+.movie-page__infobox-description {
+  text-align: left;
+}
+
+.movie-page__infobox-description li {
+  margin: 0.5rem 0;
+}
+
 @media only screen and (min-width: 768px) {
   .movie-page__infobox {
     font-size: 2rem;

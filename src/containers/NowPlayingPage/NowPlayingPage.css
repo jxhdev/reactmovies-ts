@@ -19,6 +19,7 @@
 .movie-list li {
   display: flex;
   justify-content: center;
+  max-width: 32rem;
 }
 
 .pages-button {
