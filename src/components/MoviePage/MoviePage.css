@@ -1,0 +1,36 @@
+.movie-page {
+  display: flex;
+  justify-content: center;
+  width: 100%;
+  color: white;
+}
+
+.movie-page__infobox {
+  display: flex;
+  flex-direction: column;
+  font-size: 1.5rem;
+  padding: 4rem;
+  width: 100%;
+  background-color: rgba(135, 135, 135, 0.8);
+  border: 1px solid rgba(135, 135, 135, 0.8);
+}
+
+@media only screen and (min-width: 768px) {
+  .movie-page__infobox {
+    font-size: 2rem;
+    padding: 3rem;
+    width: 90%;
+    height: 90%;
+    align-self: center;
+    background-color: rgba(135, 135, 135, 0.8);
+    border-radius: 1rem;
+  }
+}
+
+@media only screen and (min-width: 1440px) {
+  .movie-page__infobox {
+    font-size: 3rem;
+    padding: 4rem;
+    width: 60%;
+  }
+}

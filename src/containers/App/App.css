@@ -5,6 +5,6 @@
 .content-container {
   display: flex;
   justify-content: center;
-  background-color: lightcyan;
+  background-color: #ffffff;
   min-height: 100vh;
 }

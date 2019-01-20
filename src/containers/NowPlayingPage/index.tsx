@@ -2,7 +2,7 @@ import * as React from 'react';
 import axios from 'axios';
 import MovieCard from '../../components/MovieCard';
 import './NowPlayingPage.css';
-import fetchAll from '../../utils/fetchAll';
+import { fetchAllNowPlaying } from '../../utils/fetchAll';
 import uuid from 'uuid/v4';
 
 export interface IMovie {
@@ -38,7 +38,7 @@ export default class NowPlayingPage extends React.Component<
   }
 
   public async componentDidMount() {
-    const res = await fetchAll();
+    const res = await fetchAllNowPlaying();
     this.setState({
       completeResults: res,
       currentPage: res[0],

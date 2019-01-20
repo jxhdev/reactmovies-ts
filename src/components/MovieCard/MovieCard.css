@@ -3,14 +3,21 @@ li {
 }
 
 .movie-card {
+  color: white;
   width: fit-content;
   max-width: 20rem;
   margin: 1rem;
-  background-color: yellow;
-  padding: 1rem;
-  border: 1px solid black;
+  background-color: #3f51b5;
+  padding: 1rem 1rem 1rem 1rem;
+  border: 1px solid #bdbdbd;
+  border-radius: 1rem;
 }
 
 .movie-card img {
   width: 100%;
+  border-radius: 1rem;
+}
+
+.movie-card h2 {
+  margin: auto 0;
 }
